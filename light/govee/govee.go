@@ -60,6 +60,15 @@ func (g Govee) TurnOn() error {
 }
 
 func (g Govee) TurnOff() error {
+	err := g.controlDevice(Capability{
+		Type:     capabilityTypeColor,
+		Instance: capabilityInstanceColor,
+		Value:    0,
+	})
+	if err != nil {
+		return err
+	}
+
 	return g.controlDevice(Capability{
 		Type:     capabilityTypeOnOff,
 		Instance: capabilityInstanceOnOff,
