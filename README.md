@@ -4,13 +4,11 @@ This lightweight library enables a busy light integration for your smart home, h
 
 The light syncs with your calendar and changes color based on upcoming or ongoing events:
 
-🟢 Green – no events
-
 🟡 Yellow – event starting in 10 minutes
 
 🔴 Red – event currently in progress
 
-The light is only active during working hours, currently defined as 09:00–18:00 in the system's local timezone. Outside of these hours, the light remains off.
+The light is only active when there is an upcoming or ongoing event.
 
 ## Current Support
 
@@ -54,7 +52,7 @@ func main() {
 
 	// Create a status instance and a tracker
 	stat := status.New()
-	tracker := status.NewTracker(*stat)
+	tracker := status.NewTracker()
 
 	// Sync status with the calendar and track changes every minute
 	go scheduler.Every(ctx, time.Minute, func() {

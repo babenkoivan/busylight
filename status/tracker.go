@@ -19,9 +19,8 @@ func (t *Tracker) Record(status Status) {
 	t.current = status
 }
 
-func NewTracker(current Status) *Tracker {
+func NewTracker() *Tracker {
 	return &Tracker{
-		current: current,
-		C:       make(chan Transition),
+		C: make(chan Transition),
 	}
 }

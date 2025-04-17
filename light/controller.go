@@ -6,8 +6,7 @@ import (
 )
 
 const (
-	Green = iota
-	Yellow
+	Yellow = iota
 	Red
 )
 
@@ -24,11 +23,11 @@ type Controller struct {
 }
 
 func (c Controller) ProcessStatusTransition(trans status.Transition) error {
-	if trans.To == status.Inactive {
+	if trans.To == status.Idle {
 		return c.provider.TurnOff()
 	}
 
-	if trans.From == status.Inactive {
+	if trans.From == status.Idle {
 		if err := c.provider.TurnOn(); err != nil {
 			return err
 		}
@@ -36,8 +35,6 @@ func (c Controller) ProcessStatusTransition(trans status.Transition) error {
 
 	var color Color
 	switch trans.To {
-	case status.Active:
-		color = Green
 	case status.Focused:
 		color = Yellow
 	case status.Busy:

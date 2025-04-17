@@ -23,7 +23,6 @@ const (
 )
 
 var colorMap = map[light.Color]int{
-	light.Green:  65280,
 	light.Yellow: 16776960,
 	light.Red:    16711680,
 }

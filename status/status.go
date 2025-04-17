@@ -6,13 +6,10 @@ import (
 )
 
 const (
-	Inactive = Status(iota)
-	Active
+	_ = Status(iota)
+	Idle
 	Focused
 	Busy
-
-	activeHourFrom   = 9
-	inactiveHourFrom = 18
 
 	focusTime = 10 * time.Minute
 )
@@ -21,14 +18,8 @@ type Status int
 
 func (s *Status) Sync(cal *calendar.Calendar) {
 	now := time.Now()
-
-	if now.Hour() >= inactiveHourFrom || now.Hour() < activeHourFrom {
-		*s = Inactive
-		return
-	}
-
 	focusCutoff := time.Now().Add(focusTime)
-	status := Active
+	status := Idle
 
 	for _, e := range cal.Events() {
 		switch {
@@ -44,6 +35,6 @@ func (s *Status) Sync(cal *calendar.Calendar) {
 }
 
 func New() *Status {
-	status := Inactive
+	status := Idle
 	return &status
 }
