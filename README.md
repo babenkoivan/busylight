@@ -8,7 +8,7 @@ The light syncs with your calendar and changes color based on upcoming or ongoin
 
 🔴 Red – event currently in progress
 
-The light is only active when there is an upcoming or ongoing event.
+The light is only active when there is an upcoming or ongoing event. Events that take more than 10 hours are ignored.
 
 ## Current Support
 

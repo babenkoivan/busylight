@@ -1,6 +1,12 @@
-package timezone
+package ics
 
-var windowsZones = map[string]string{
+import (
+	"fmt"
+	"github.com/apognu/gocal"
+	"time"
+)
+
+var tzMap = map[string]string{
 	"AUS Central Standard Time":       "Australia/Darwin",
 	"AUS Eastern Standard Time":       "Australia/Sydney",
 	"Afghanistan Standard Time":       "Asia/Kabul",
@@ -138,4 +144,13 @@ var windowsZones = map[string]string{
 	"West Bank Standard Time":         "Asia/Hebron",
 	"West Pacific Standard Time":      "Pacific/Port_Moresby",
 	"Yakutsk Standard Time":           "Asia/Yakutsk",
+}
+
+func init() {
+	gocal.SetTZMapper(func(s string) (*time.Location, error) {
+		if tz, ok := tzMap[s]; ok {
+			return time.LoadLocation(tz)
+		}
+		return nil, fmt.Errorf("unknown timezone %s", s)
+	})
 }
